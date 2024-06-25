@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Just Wizard</title>
+    <meta name="description" content="Just Wizard (singular)">
+    <link rel="icon" type="image/png" href="favicon.jpg">
+    <meta name="robots" content="noindex">
+
+    <style>
+
+        * {
+            cursor: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;
+            background: darkred;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<img src="wizard.webp" alt="Wizard">
+
+<script>
+
+    let xPos = 0, yPos = 0;
+    let xVel = 3;
+    let yVel = 3;
+
+    function animate() {
+        let maxX = screen.width - window.outerWidth;
+        let maxY = screen.height - window.outerHeight;
+        xPos += xVel;
+        if (xPos > maxX || xPos < 0) xVel = -xVel;
+        yPos += yVel;
+        if (yPos > maxY || yPos < 0) yVel = -yVel;
+        window.moveTo(xPos, yPos);
+        window.requestAnimationFrame(animate);
+    }
+
+    window.requestAnimationFrame(animate);
+
+</script>
+
+</body>
+
+</html>

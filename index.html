@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<!--suppress CssOverwrittenProperties, HtmlUnknownAttribute -->
+<html lang="en-GB">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Just Wizards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Java Cake Games">
+<meta name="description" content="Here at Just Wizards we have just wizards and no more.">
+<meta name="theme-color" content="#aaa">
+<meta name="application-name" content="Just Wizards"/>
+<link rel="icon" type="image/png" href="favicon.jpg">
+<link rel="apple-touch-icon-precomposed" href="favicon.jpg">
+
+<meta property="og:title" content="Just Wizards">
+<meta property="og:site_name" content="Just Wizards">
+<meta property="og:url" content="https://justwizards.me/">
+<meta property="og:description" content="Here at Just Wizards we have just wizards and no more.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://justwizards.me/wizard.webp">
+
+<style>
+	/*noinspection CssInvalidPropertyValue*/
+	* {
+		cursor: url("cursor.png") 6 4, url("cursor32.png") 1.5 1, auto;
+		cursor:
+			-webkit-image-set(url("cursor.png") 1x, url("cursor@1.5x.png") 1.5x) 6 4,
+			-webkit-image-set(url("cursor32.png") 1x, url("cursor32@1.5x.png") 1.5x) 1.5 1,
+			default;
+		cursor:
+			image-set(url("cursor.png") 1x, url("cursor@1.5x.png") 1.5x) 6 4,
+			image-set(url("cursor32.png") 1x, url("cursor32@1.5x.png") 1.5x) 1.5 1,
+			default;
+	}
+	/*noinspection CssInvalidPropertyValue*/
+	a, .thereButton {
+		cursor: url("cursorflip.png") 121 4, url("cursor32flip.png") 29.5 1, auto;
+		cursor:
+			-webkit-image-set(url("cursorflip.png") 1x, url("cursorflip@1.5x.png") 1.5x) 121 4,
+			-webkit-image-set(url("cursor32flip.png") 1x, url("cursor32flip@1.5x.png") 1.5x) 29.5 1,
+			pointer;
+		cursor:
+			image-set(url("cursorflip.png") 1x, url("cursorflip@1.5x.png") 1.5x) 121 4,
+			image-set(url("cursor32flip.png") 1x, url("cursor32flip@1.5x.png") 1.5x) 29.5 1,
+			pointer;
+	}
+	html {
+		--backgroundPos: 0;
+		--aspectScale: 1.1;
+	}
+	html::before {
+		content: " ";
+		display: block;
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #fff;
+		background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' width='100' height='100' viewBox='-50 -50 489.55 489.55' opacity='0.05' version='1.0'%3E%3Ccircle cx='249.5' cy='249.5' r='205' fill='%23fff' stroke='%23000' transform='translate(-30.253 -31.61)'/%3E%3Cg transform='translate(-30.253 -31.61)'%3E%3Cpath d='M105.403 257.423h246.02901v39.354H105.403z'/%3E%3Cpath fill='none' stroke='%23000' stroke-linejoin='round' stroke-miterlimit='10' stroke-width='13.18700027' d='M274.445 100.269c-23.356 0-32.885 18.899-32.885 33.48 0 16.618 13.668 34.512 39.566 32.992-8.953 15.205-1.094 39.916 20.144 39.916h35.414c18.898 0 28.707 10.047 28.707 25.579v18.056'/%3E%3Cpath fill='none' stroke='%23000' stroke-linejoin='round' stroke-miterlimit='10' stroke-width='13.18700027' d='M285.789 113.105c23.736 0 39.488 16.49 39.488 36.692 0 7.809-2.933 17.27-8.881 25.473h20.938c30.438 0 48.593 25.359 48.593 50.775v24.247m-20.53601 6.50701V296.621m20.61401-39.82199V296.621'/%3E%3Cpath fill='%23fff' d='M273.44101 89.786003h13.187v32.618999h-13.187z'/%3E%3Cpath fill='none' stroke='%23fff' stroke-miterlimit='10' stroke-width='55' d='M393.35001 392.509 110.112 109.275'/%3E%3Cpath fill='none' stroke='red' stroke-miterlimit='10' stroke-width='49' d='M250.029 446.658c-107.846 0-195.276-87.428-195.276-195.271 0-107.848 87.43-195.277 195.276-195.277 107.845 0 195.274 87.429 195.274 195.277 0 107.843-87.429 195.271-195.274 195.271z'/%3E%3Cpath fill='none' stroke='red' stroke-miterlimit='10' stroke-width='51.11999893' d='M392.86801 392.19101 109.63 108.957'/%3E%3C/g%3E%3C/svg%3E");
+		background-size: 75px 75px;
+		background-position-x: var(--backgroundPos);
+		background-position-y: var(--backgroundPos);
+		z-index: -99;
+	}
+	body {
+		padding: 0;
+		margin: 0;
+		overflow-x: hidden;
+		font-size: 18px;
+	}
+	::selection {
+		background: #f40;
+	}
+	h3 {
+		margin-bottom: 0;
+	}
+	#greetingsContainerContainer {
+		background-color: #111;
+	}
+	#greetingsContainer {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		color: #fff;
+		overflow: hidden;
+		max-width: calc(100vh * calc(16/9));
+		margin: 0 auto;
+	}
+	#greetings {
+		background-color: #000;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		margin: auto;
+	}
+	@keyframes blue {
+		from { background-color: #0f0; }
+		to { background-color: #00f; }
+	}
+	#greetingsWizard {
+		position: absolute;
+		width: auto;
+		height: 100%;
+		top: 0;
+		left: -5%;
+		animation: spin 100s linear infinite;
+	}
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		10% { transform: rotate(360deg); }
+		20% { transform: rotate(720deg); }
+		30% { transform: rotate(1080deg); }
+		31% { transform: rotate(1440deg); }
+		40% { transform: rotate(1800deg); }
+		50% { transform: rotate(2160deg); }
+		60% { transform: rotate(2520deg); }
+		70% { transform: rotate(2880deg); }
+		80% { transform: rotate(3240deg); }
+		90% { transform: rotate(3600deg); }
+		100% { transform: rotate(3960deg); }
+	}
+	#greetingsText {
+		position: absolute;
+		top: 50%;
+		left: 40%;
+		font-size: 32px;
+		font-size: calc(2.5vw * var(--aspectScale));
+		animation: greetingsFlash 1s linear infinite;
+		padding-right: 10px;
+		padding-right: calc(0.5vw * var(--aspectScale));
+		transform: translateY(-50%);
+	}
+	@keyframes greetingsFlash {
+		    0% { color: #fff; }
+		49.99% { color: #fff; }
+		   50% { color: #ff0; }
+		99.99% { color: #ff0; }
+		  100% { color: #fff; }
+	}
+	.thereButtonContainer {
+		text-align: center;
+	}
+	.clickHere {
+		animation: blue 0.5s linear infinite alternate;
+	}
+	.thereButton {
+		text-transform: uppercase;
+		font-size: 2em;
+		background-color: #f00;
+		animation: bounce 2s linear infinite;
+		border-radius: 500px;
+		padding: 0 10px 0 10px;
+		padding: 0 calc(0.5vw * var(--aspectScale)) 0 calc(0.5vw * var(--aspectScale));
+	}
+	@keyframes bounce {
+		0% {
+			margin-left: -75%;
+			font-size: 32px;
+			font-size: calc(2.5vw * var(--aspectScale));
+		}
+		25% {
+			font-size: 64px;
+			font-size: calc(5vw * var(--aspectScale));
+		}
+		50% {
+			margin-left: 75%;
+			font-size: 32px;
+			font-size: calc(2.5vw * var(--aspectScale));
+		}
+		75% {
+			font-size: 64px;
+			font-size: calc(5vw * var(--aspectScale));
+		}
+		100% {
+			margin-left: -75%;
+			font-size: 32px;
+			font-size: calc(2.5vw * var(--aspectScale));
+		}
+	}
+	#cookieText {
+		font-size: 16px;
+		font-size: calc(1.25vw * var(--aspectScale));
+	}
+	.widescreen {
+		position: relative;
+		padding-bottom: 56.25%;
+		height: 0;
+		overflow: hidden;
+		max-width: 100%;
+	}
+	#tooWideMessage {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		color: #fff;
+		transform: rotate(-90deg);
+		font-size: 1vw;
+	}
+	#speaker {
+		position: absolute;
+		top: 1%;
+		left: 1%;
+		width: 5%;
+		height: auto;
+		animation: seesaw 0.5s linear infinite;
+		z-index: 1;
+	}
+	@keyframes seesaw {
+		0% { transform: rotate(0); }
+		25% { transform: rotate(12deg); }
+		75% { transform: rotate(-12deg); }
+		100% { transform: rotate(0deg); }
+	}
+	#speakerTextContainer {
+		position: absolute;
+		top: 3%;
+		left: 5.5%;
+		width: 30%;
+		overflow: hidden;
+		
+	}
+	#speakerText {
+		font-size: 32px;
+		font-size: calc(2.5vw * var(--aspectScale));
+		white-space: nowrap;
+		animation: marquee 5s linear infinite, greetingsFlash 1s linear infinite reverse;
+	}
+	@keyframes marquee {
+		from { transform: translateX(100%); }
+		to { transform: translateX(-260%); }
+	}
+	@supports (-moz-appearance: none) {
+		@keyframes marquee {
+			from { transform: translateX(100%); }
+			to { transform: translateX(-310%); }
+		}
+	}
+	#speakerTextOverlayContainer {
+		position: absolute;
+		top: 3%;
+		left: 5.5%;
+		width: 30%;
+		overflow: hidden;
+		background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 10%);
+		padding-bottom: 0.5%;
+	}
+	#speakerTextOverlay {
+		font-size: 32px;
+		font-size: calc(2.5vw * var(--aspectScale));
+		white-space: nowrap;
+	}
+	#speakerTextBorder {
+		position: absolute;
+		top: 2%;
+		left: 5.5%;
+		width: 30%;
+		height: 7%;
+		border-style: solid solid solid none;
+		border-color: #aaa;
+		border-radius: 15px;
+	}
+	#speakerWave {
+		fill: none;
+		stroke: #fa0;
+		stroke-width: 5;
+		stroke-linecap: round;
+	}
+	
+	#uh-oh {
+		display: none;
+	}
+	header {
+		background-color: #ffc;
+		background-image: url("wizard.webp");
+		background-size: auto 100%;
+		font-family: "Comic Sans MS", cursive, sans-serif;
+		font-size: 75px;
+		color: #00f;
+		padding-left: 25px;
+		line-height: 130px;
+		animation: slide 1s linear infinite;
+		height: 150px;
+	}
+	@keyframes slide {
+		from { background-position-x: 0; }
+		to { background-position-x: 150px; }
+	}
+	#fire {
+		position: absolute;
+		top: 0;
+		right: -8px;
+		width: auto;
+		height: 150px;
+	}
+	#websiteName {
+		all: unset;
+		background-color: rgba(255, 255, 255, 0.75);
+		animation: rainbow 0.2s linear alternate infinite;
+		white-space: nowrap;
+	}
+	@keyframes rainbow {
+		0% { color: #0ff; }
+		49.99% { color: #0ff; }
+		50% { color: #f0f; }
+		100% { color: #f0f; }
+	}
+	main {
+		padding: 10px;
+	}
+	#here {
+		animation: caps 0.1s linear alternate infinite;
+	}
+	@keyframes caps {
+		from { text-transform: lowercase; }
+		to { text-transform: uppercase; }
+	}
+	#galleryContainer {
+		background: #ddd;
+		height: 90vh;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		overflow: hidden;
+	}
+	#galleryContainer:-webkit-full-screen,
+	#galleryContainer:-moz-full-screen,
+	#galleryContainer:-ms-fullscreen,
+	#galleryContainer:fullscreen {
+		width: 100%;
+		height: 100%;
+	}
+	#galleryButtons, #galleryCaption {
+		text-align: center;
+		background: #eee;
+		padding: .5em;
+		flex: 0;
+	}
+	#gallery {
+		text-align: center;
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		align-items: center;
+		position: relative;
+		transition: transform 150ms;
+	}
+	.galleryImage {
+		width: 100%;
+		max-height: 100%;
+		position: absolute;
+		display: inline;
+	}
+	#image2 { transform: translateX(100%); }
+	#image3 { transform: translateX(200%); }
+	#image4 { transform: translateX(300%); }
+	#image5 { transform: translateX(400%); }
+	#image6 { transform: translateX(500%); }
+	#image7 { transform: translateX(600%); }
+	#image8 { transform: translateX(700%); }
+	#image9 { transform: translateX(800%); }
+	#image10 { transform: translateX(900%); }
+	#image11 { transform: translateX(1000%); }
+	#image12 { transform: translateX(1100%); }
+
+	#galleryCaption {
+		text-align: initial;
+	}
+	
+	#spinMeRound {
+		width: 100%;
+		width: 100vw;
+		height: 100%;
+		height: 100vh;
+		text-align: center;
+		background-color: #000;
+		display: none;
+	}
+
+	#spinMeRound * {
+		cursor: none;
+	}
+	
+	#spinMeRoundVid {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+	.spinMyWizard {
+		position: absolute;
+		width: auto;
+		height: 50%;
+		top: 0;
+		left: 0;
+		animation: spin2 1.5s linear infinite;
+	}
+	.spinMyWizard.right {
+		left: initial;
+		right: 0;
+		animation-direction: reverse;
+	}
+	.spinMyWizard.right > img {
+		width: 100%;
+		height: 100%;
+		scale: -1 1;
+	}
+	@keyframes spin2 {
+		from {
+			transform: rotate(0deg);
+			top: -50%;
+		}
+		to {
+			transform: rotate(360deg);
+			top: 0;
+		}
+	}
+	@keyframes spin3 {
+		from {
+			transform: rotate(0deg);
+			top: 0;
+		}
+		to {
+			transform: rotate(360deg);
+			top: 50%;
+		}
+	}
+	@keyframes spin4 {
+		from {
+			transform: rotate(0deg);
+			top: 50%;
+		}
+		to {
+			transform: rotate(360deg);
+			top: 100%;
+		}
+	}
+	
+	#spinMyWizard2 {
+		animation: spin3 1.5s linear infinite;
+	}
+	#spinMyWizard3 {
+		animation: spin4 1.5s linear infinite;
+	}
+	#spinMyWizard5 {
+		animation: spin3 1.5s linear infinite reverse;
+	}
+	#spinMyWizard6 {
+		animation: spin4 1.5s linear infinite reverse;
+	}
+	#4-3 {
+		position: relative;
+		padding-bottom: 75%;
+		height: 0;
+		overflow: hidden;
+		max-width: 100%;
+	}
+
+	footer::before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #ffc;
+		content: "";
+	}
+	footer {
+		position: relative;
+		height: 150px;
+	}
+	footer::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url("wizard.webp"), url("wizard.webp"), url("wizard.webp"), url("wizard.webp");
+		background-size: auto 500%, auto 500%, auto 500%, auto 500%;
+		background-position: 0 0, 187.5px 0, 375px 0, 562.5px 0;
+		background-repeat: repeat-x;
+		animation: slide2 5s linear infinite;
+	}
+
+	@keyframes slide2 {
+		0% {
+			background-position: 0 150px, 187.5px 0, 375px 150px, 562.5px 0;
+			filter: hue-rotate(0);
+		}
+		50% {
+			background-position: 375px 0, 562.5px 150px, 750px 0, 937.5px 150px;
+			filter: hue-rotate(180deg);
+		}
+		100% {
+			background-position: 750px 150px, 937.5px 0, 1125px 150px, 1312.5px 0;
+			filter: hue-rotate(360deg);
+		}
+	}
+	#footerText {
+		position: absolute;
+		top: 37.5px;
+		left: 25px;
+		background-color: rgba(0, 0, 0, 0.75);
+		font-size: 32px;
+		color: #fff;
+		z-index: 1;
+	}
+	
+	iframe {
+		display: none;
+	}
+
+	img {
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
+		pointer-events: none;
+	}
+
+	a {
+		color: #00e;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+
+	.yesScript {
+		display: none;
+	}
+
+	#captchaStuff > svg {
+		background: #fff;
+	}
+</style>
+
+</head>
+
+<body oncontextmenu="spinMeRound(event);">
+
+<audio id="hoHoHoHo" autoplay loop preload="auto">
+	<source src="ho.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="winXP" preload="auto">
+	<source src="startup.m4a" type="audio/mpeg">
+</audio>
+
+<audio id="hagrid" preload="auto">
+	<source src="wizard.m4a" type="audio/mpeg">
+</audio>
+
+<div id="greetingsContainerContainer">
+	<noscript>
+		<div id="tooWideMessage">Please resize your window to make it taller.</div>
+	</noscript>
+	<div id="greetingsContainer">
+		<div class="widescreen">
+			<div id="greetings">
+				<img id="greetingsWizard" src="wizard.webp" alt="A jolly wizard greets you!" fetchpriority="high">
+				<svg id="speaker" viewBox="0 0 75 75">
+					<polygon id="speakerWave" points="39.389,13.769 22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769"
+					style="stroke:#fa0;stroke-width:5;stroke-linejoin:round;fill:#fa0;" />
+					<path id="speakerWave" d="M 48.128,49.03 C 50.057,45.934 51.19,42.291 51.19,38.377 C 51.19,34.399 50.026,30.703 48.043,27.577"/>
+					<path id="speakerWave" d="M 55.082,20.537 C 58.777,25.523 60.966,31.694 60.966,38.377 C 60.966,44.998 58.815,51.115 55.178,56.076"/>
+					<path id="speakerWave" d="M 61.71,62.611 C 66.977,55.945 70.128,47.531 70.128,38.378 C 70.128,29.161 66.936,20.696 61.609,14.01"/>
+				</svg>
+				<div id="speakerTextContainer">
+					<div id="speakerText">
+						This website is vastly superior if you have your volume cranked up!
+					</div>
+				</div>
+				<div id="speakerTextOverlayContainer">
+					<div id="speakerTextOverlay">
+						<span style="opacity: 0;">This website is vastly superior if you have your audio cranked up!</span>
+					</div>
+				</div>
+				<div id="speakerTextBorder">
+				</div>
+				<div id="greetingsText">
+					<noscript>
+						<p>Listen up, you need JavaScript enabled in your browser for this website to function. This wizard was dropped on his head as a young'un, so he lacks the magic to perform interactivity without JavaScript.</p>
+						<div class="thereButtonContainer">
+							<span class="clickHere">Find out how to:</span><br>
+							<span class="thereButton">
+								<a href="https://www.larimer.gov/it/enable-javascript" target="_blank">Enable JavaScript</a>
+							</span>
+						</div>
+					</noscript>
+
+					<div class="yesScript">
+						<p>Listen up, I am here to showcase my personal website; my journeys throughout this sacred earth. It may contain some foundational imperfections, owing to the fact Claire without an 'I' wanted this out for Friday (the 10th of November... 2017). But have no fear, for it has since been updated to use the latest web browsing technologies! Anyway, enough rambles, click there to enter.</p>
+
+						<div class="thereButtonContainer">
+							<span class="clickHere">Click here:</span><br>
+							<span class="thereButton" onclick="thereButton();">
+								There
+							</span>
+						</div>
+						<p id="cookieText"><s>Also, by clicking there you are agreeing to the use of cookies in order to remember if you have clicked there or not.</s> That's a lie.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const elements = document.getElementsByClassName("yesScript");
+	for (let i = 0; i < elements.length; i++) {
+		elements[i].style.display = "block";
+	}
+</script>
+
+<div id="uh-oh">
+	<header id="header">
+		<h1 id="websiteName" onclick="fastWizards();">Just Wizards</h1>
+		<img id="fire" title="Wizards are disposable... right?" src="fire.gif" alt="Fire is hot!">
+	</header>
+
+	<main>
+		<h2>Website Introduction</h2>
+		<p>To make our website more friendly to visually-impaired users, we now have our website introduction as an audio file.</p>
+		<p>Please fill out this visual captcha to listen to it.</p>
+	
+		<audio id="introduction" controls loop style="display: none;" preload="metadata">
+			<source src="introduction.m4a" type="audio/mpeg">
+			Turns out your browser doesn't support AAC. R.I.P. you.
+		</audio>
+		
+		<div id="captchaStuff">
+			<svg viewBox="0 0 210 90" height="90" width="210" style="border: 1px solid;">
+				<g transform="translate(0,-962.36216)">
+					<path d="m 36.744299,983.54552 c -0.500499,-0.11118 -0.981999,-0.45498 -1.515229,-0.37881 -0.364064,0.052 -0.815324,0.23061 -1.136422,0.37881 -0.341811,0.15776 -0.656356,0.37642 -1.010152,0.50507 -4.28376,1.55774 0.804123,-0.70604 -3.535534,1.38896 -0.627422,0.3029 -1.262691,0.58926 -1.894036,0.88389 -0.631345,0.29462 -1.304177,0.51311 -1.894036,0.88388 -2.116443,1.33034 -2.537306,1.90596 -4.166879,3.53553 -2.148325,2.14833 -1.141662,1.05079 -3.030458,3.283 -0.462987,0.54717 -0.965093,1.0635 -1.38896,1.6415 -0.50399,0.68726 -0.992026,1.3924 -1.388959,2.14657 -0.71308,1.35485 -1.598072,3.82548 -2.020306,5.30328 -0.249609,0.8737 -0.392279,1.7751 -0.631345,2.6517 -0.26625,0.9762 -0.689586,1.9111 -0.883883,2.9042 -0.307232,1.5703 -0.252539,3.2078 -0.252539,4.7982 0,1.0522 -0.04381,2.1054 0,3.1567 0.0725,1.7399 0.309429,3.5864 0.631346,5.3033 0.221485,1.1813 0.565019,2.4227 1.010152,3.5355 0.258751,0.6469 0.655983,1.2357 0.883884,1.8941 0.153931,0.4447 0.0031,0.9899 0.252538,1.3889 0.410118,0.6562 1.094332,1.0944 1.641498,1.6415 0.294628,0.2947 0.55055,0.6339 0.883883,0.8839 0.681801,0.5114 1.415775,0.9505 2.146575,1.389 1.280224,0.7681 2.58289,1.3819 4.04061,1.7678 0.615726,0.1629 1.261569,0.1772 1.894036,0.2525 1.135397,0.1352 2.267748,0.3129 3.409265,0.3788 1.662248,0.096 4.666065,-0.012 6.313453,-0.2525 0.980304,-0.143 1.936126,-0.4209 2.904189,-0.6314 0.968062,-0.2104 1.936125,-0.4209 2.904188,-0.6313 0.968063,-0.2105 1.956437,-0.3429 2.904189,-0.6314 1.492799,-0.4543 3.671857,-1.411 5.050762,-2.2728 0.66391,-0.415 1.267706,-0.9192 1.894036,-1.389 1.495144,-1.1213 2.858384,-2.0577 4.040611,-3.5355 0.459943,-0.5749 0.757614,-1.2627 1.136421,-1.894 0.378807,-0.6314 0.789942,-1.2444 1.136422,-1.8941 0.655725,-1.2295 1.112041,-2.5586 1.767767,-3.7881 0.346479,-0.6496 0.867203,-1.2087 1.136421,-1.894 0.202427,-0.5153 0.161527,-1.0954 0.252539,-1.6415 0.119449,-0.7167 0.273094,-1.4277 0.378807,-2.1466 0.345976,-2.3526 0.252538,-2.0789 0.252538,-4.5457 0,-0.6313 0.04969,-1.2646 0,-1.894 -0.135081,-1.711 -0.460481,-3.367 -0.757614,-5.0508 -0.345467,-1.9576 -0.341063,-2.39734 -1.010153,-4.2931 -0.516396,-1.46312 -1.002176,-2.47563 -1.767767,-3.78807 -0.276516,-0.47403 -0.589256,-0.92597 -0.883883,-1.38896 -0.294628,-0.46299 -0.519293,-0.9788 -0.883884,-1.38896 -0.318826,-0.35868 -0.757614,-0.58926 -1.136422,-0.88388 -0.378807,-0.29463 -0.737123,-0.61769 -1.136421,-0.88389 -0.482269,-0.32151 -2.031397,-1.10551 -2.525382,-1.26269 -0.448425,-0.14268 -0.92571,-0.16981 -1.388959,-0.25254 -0.715266,-0.12772 -1.432438,-0.2449 -2.146574,-0.3788 -1.265642,-0.23731 -2.522431,-0.52031 -3.788072,-0.75762 -0.714136,-0.1339 -1.439309,-0.21239 -2.146575,-0.3788 -0.726005,-0.17083 -1.431049,-0.4209 -2.146574,-0.63135 -0.715525,-0.21045 -1.413084,-0.49623 -2.146574,-0.63135 -0.873191,-0.16085 -1.768646,-0.15959 -2.65165,-0.25253 -0.716501,-0.0754 -1.43105,-0.16836 -2.146575,-0.25254 -0.715524,-0.0842 -1.427358,-0.21023 -2.146574,-0.25254 -1.222063,-0.0719 -2.827263,-0.0306 -4.04061,0.25254 -1.459995,0.34066 -2.437326,0.88488 -3.788072,1.51523 -0.631345,0.29462 -1.289124,0.53822 -1.894036,0.88388 -1.298384,0.74193 -1.876963,1.37568 -3.030458,2.27284 -1.593018,1.23902 -0.163699,0.067 -1.767767,1.13642 -0.681188,0.45413 0.08697,0.0393 -0.378807,0.50508 -0.02976,0.0298 -0.08418,0 -0.126269,0"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+					<path d="m 46.214479,1020.5424 c 0.126269,0.1683 0.207558,0.3827 0.378807,0.505 0.429149,0.3066 0.924615,0.5076 1.38896,0.7576 0.629999,0.3393 1.301379,0.6093 1.894036,1.0102 5.393173,3.6483 -0.401192,0.3149 4.545686,3.283 0.595013,0.357 4.529231,2.5296 5.303301,3.0305 2.779424,1.7984 0.980179,0.8506 3.282996,2.5253 0.44382,0.3228 0.93938,0.5692 1.38896,0.8839 0.393146,0.2752 0.731551,0.6263 1.136421,0.8839 0.07102,0.045 0.172679,-0.027 0.252539,0 0.05647,0.019 0.08418,0.084 0.126269,0.1263 0.04209,0.042 0.08418,0.084 0.126269,0.1262"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+					<path d="m 84.221469,985.94463 c 2.658459,0.98807 5.369072,1.82621 8.08122,2.65165 0.968063,0.29463 1.944211,0.56389 2.904189,0.88388 2.157059,0.71902 2.474276,0.80773 4.293148,2.02031 0.450932,0.30062 1.677814,1.27306 2.020304,1.76777 0.28547,0.41234 0.2833,1.19578 0.37881,1.64149 0.005,0.0244 0.50385,1.75734 0.50507,1.76777 0.0492,0.41801 0,0.8418 0,1.26269 0,0.46299 0.0485,0.92852 0,1.38896 -0.15374,1.46065 -1.07032,2.49445 -2.14657,3.40925 -0.964521,0.8199 -1.975457,1.2953 -3.156726,1.7678 -0.617898,0.2471 -1.276139,0.3842 -1.894036,0.6313 -0.646878,0.2588 -1.262691,0.5893 -1.894036,0.8839 -0.631346,0.2946 -1.270882,0.5723 -1.894037,0.8839 -0.824077,0.412 -1.309221,0.7096 -2.020305,1.2627 -0.09397,0.073 -0.168358,0.1683 -0.252538,0.2525 -0.04209,0.042 -0.09965,0.073 -0.126269,0.1263 -0.177998,0.356 1.07145,0.4819 1.136422,0.5051 0.390385,0.1394 0.752749,0.3481 1.136421,0.505 0.542595,0.222 1.089911,0.4328 1.641498,0.6314 0.500926,0.1803 1.02218,0.3042 1.515229,0.5051 0.645216,0.2628 1.262691,0.5892 1.894036,0.8839 0.631346,0.2946 1.286802,0.5423 1.894036,0.8838 0.742802,0.4179 1.429679,0.9281 2.146575,1.389 0.46162,0.2968 0.93938,0.5692 1.38896,0.8839 1.129,0.7903 2.16909,1.728 2.90419,2.9042 0.38628,0.618 0.79081,1.2757 0.88388,2.0203 0.047,0.3759 0,0.7576 0,1.1364 0,0.1684 0,0.3367 0,0.5051 0,0.2525 0.0863,0.5202 0,0.7576 -0.0921,0.2533 -0.34656,0.4134 -0.50508,0.6313 -0.52537,0.7224 -0.43019,0.751 -1.01015,1.389 -0.69505,0.7646 -0.89637,0.8859 -1.76776,1.5152 -1.6805,1.2137 -0.82628,0.6098 -2.651655,1.6415 -0.509043,0.2877 -0.996133,0.6147 -1.515229,0.8839 -2.660541,1.3795 -1.177287,0.4315 -4.04061,1.7678 -1.683921,0.7858 -1.862394,1.2261 -3.788072,1.7677 -0.613144,0.1725 -1.263505,0.1625 -1.894036,0.2526 -2.26057,0.3229 -0.952855,0.2525 -3.030458,0.2525 -0.462986,0 -0.930218,0.063 -1.38896,0 -0.475495,-0.065 -0.923391,-0.2624 -1.388959,-0.3788 -0.376462,-0.094 -0.762531,-0.1487 -1.136422,-0.2525 -0.758821,-0.2108 -1.316657,-0.4378 -2.020305,-0.7577 -0.287971,-0.1308 -0.653184,-0.2743 -0.883883,-0.505"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+					<path d="m 125.38518,1029.0024 c -0.16102,-0.9662 -0.11474,-0.7718 -0.3788,-1.8941 -0.0795,-0.3378 -0.21621,-0.6649 -0.25254,-1.0101 -0.0485,-0.4604 0,-0.926 0,-1.389 0,-0.6313 0,-1.2627 0,-1.894 0,-0.6734 -0.0384,-1.348 0,-2.0203 0.0459,-0.8028 0.16836,-1.5994 0.25254,-2.3991 0.0842,-0.7997 0.14763,-1.6019 0.25254,-2.3991 0.10561,-0.8027 0.25253,-1.5994 0.3788,-2.3991 0.4654,-2.9476 0.28993,-2.1343 1.01016,-5.3033 0.0747,-0.3286 1.08108,-4.6195 1.26269,-5.0508 0.35858,-0.8517 0.94019,-1.5913 1.38896,-2.3991 0.39318,-0.7077 0.69861,-1.46557 1.13642,-2.14659 0.78173,-1.21603 1.64857,-1.87445 2.77792,-2.77792 0.70337,-0.5627 1.39709,-1.14185 2.14657,-1.6415 0.51708,-0.34472 1.09433,-0.58926 1.6415,-0.88389 0.54717,-0.29462 1.08566,-0.60596 1.6415,-0.88388 0.62315,-0.31158 1.27088,-0.5723 1.89403,-0.88388 0.38759,-0.1938 0.73255,-0.47428 1.13642,-0.63135 0.51753,-0.59971 1.19544,-0.089 1.76777,-0.25254 0.23442,-0.067 0.15042,-0.32866 0.37881,-0.25253 0.0893,0.0298 0.16325,0.0965 0.25254,0.12627 0.16463,0.0549 0.34395,0.0618 0.50507,0.12626 0.0553,0.0221 0.0798,0.0891 0.12627,0.12627 0.16433,0.13147 0.33827,0.2505 0.50508,0.37881 0.38038,0.2926 0.77658,0.56637 1.13642,0.88388 0.35707,0.31506 0.7767,0.59512 1.01015,1.01016 0.16637,0.29576 0.0388,0.68227 0.12627,1.01015 0.0826,0.30972 0.3231,0.56821 0.37881,0.88388 0.20302,1.15044 -0.31934,2.69607 -0.63135,3.78807 -0.39475,1.38163 -0.84341,2.76413 -1.51523,4.04063 -0.18493,0.3514 -0.43002,0.6679 -0.63134,1.0101 -0.21971,0.3735 -0.36811,0.7922 -0.63135,1.1365 -0.28926,0.3782 -0.67343,0.6734 -1.01015,1.0101 -0.37881,0.3788 -0.69596,0.8315 -1.13642,1.1364 -1.18697,0.8218 -2.96876,1.475 -4.29315,2.0203 -0.71552,0.2947 -1.41688,0.6264 -2.14657,0.8839 -0.70331,0.2482 -1.43105,0.4209 -2.14658,0.6314 -0.71552,0.2104 -1.42025,0.4618 -2.14657,0.6313 -0.53912,0.1258 -1.09543,0.1615 -1.6415,0.2526 -1.69593,0.2826 -0.86782,0.2525 -1.89403,0.2525 -0.22589,0 -0.62689,-0.1174 -0.50508,0.1263 0.0266,0.053 0.0996,0.073 0.12627,0.1262 0.0188,0.038 0,0.084 0,0.1263 0.12627,0.1263 0.26259,0.2432 0.37881,0.3788 0.17257,0.2013 0.98506,1.3548 1.01015,1.389 0.63917,0.8716 1.28937,1.7248 2.0203,2.5253 0.44149,0.4836 0.85729,1.0069 1.38896,1.389 0.82665,0.5942 1.81549,0.9346 2.65165,1.5152 0.68622,0.4766 1.20453,1.1698 1.89404,1.6415 0.91774,0.628 1.97184,1.0355 2.90419,1.6415 0.75523,0.4909 1.42596,1.1011 2.14657,1.6415 0.62633,0.4698 1.25033,0.9433 1.89404,1.389 1.53843,1.0651 1.17912,0.6138 2.52538,1.7678 0.43064,0.3691 0.88388,0.7701 0.88388,1.3889"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+					<path d="m 171.59966,989.22763 c 0.29463,0.33671 0.6121,0.65474 0.88389,1.01015 0.27655,0.36164 0.47551,0.77909 0.75761,1.13642 0.57415,0.72726 1.24122,1.36749 1.89404,2.0203 0.37881,0.37881 0.77921,0.73719 1.13642,1.13643 0.67942,0.75935 1.45062,1.92256 2.14657,2.65165 1.26693,1.32726 1.73501,1.50334 3.15673,2.65165 0.90896,0.73417 2.69709,2.31177 3.53553,3.03047 0.54421,0.4664 1.10579,0.9128 1.6415,1.3889 0.22245,0.1978 0.4209,0.4209 0.63135,0.6314 0.0842,0.084 0.1865,0.1535 0.25254,0.2525 0.0233,0.035 0,0.084 0,0.1263"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+					<path d="m 194.95944,990.23778 c -0.22735,1.07183 -0.50426,2.12633 -0.88388,3.15672 -0.15672,0.42538 -0.34591,0.83824 -0.50508,1.2627 -0.47289,1.26105 -0.76813,2.3304 -1.38896,3.53553 -0.42318,0.82146 -0.92044,1.60264 -1.38896,2.39907 -0.3733,0.6347 -0.70102,1.3003 -1.13642,1.8941 -0.49406,0.6737 -1.134,1.2304 -1.6415,1.894 -0.5886,0.7697 -1.09433,1.5994 -1.6415,2.3991 -0.54716,0.7997 -1.09433,1.5994 -1.64149,2.3991 -0.54717,0.7997 -1.04108,1.6386 -1.6415,2.3992 -0.66493,0.8422 -1.48165,1.5568 -2.14658,2.3991 -0.60042,0.7605 -1.09433,1.5994 -1.64149,2.3991 -0.54717,0.7997 -1.12407,1.5798 -1.6415,2.3991 -0.49344,0.7813 -0.88696,1.6233 -1.38896,2.3991 -0.42532,0.6573 -0.92597,1.2627 -1.38896,1.894 -0.46299,0.6314 -0.92597,1.2627 -1.38896,1.8941 -1.02425,1.3967 -1.58786,2.1292 -2.52538,3.5355 -0.30441,0.4566 -0.58926,0.926 -0.88388,1.389 -0.29463,0.463 -0.6211,0.9072 -0.88389,1.3889 -0.24353,0.4465 -0.38436,0.9444 -0.63134,1.389 -0.17584,0.3165 -0.4209,0.5892 -0.63135,0.8839 -0.21045,0.2946 -0.4209,0.5892 -0.63134,0.8839 -0.21045,0.2946 -0.45969,0.565 -0.63135,0.8838 -0.1262,0.2344 -0.11145,0.5319 -0.25254,0.7577 -0.72667,1.1626 -0.10933,-0.8254 -0.50507,0.7576"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+					<path d="m 23.233509,968.77204 c 0.168358,0 0.339601,-0.031 0.505076,0 3.110551,0.58323 -0.200362,0.33643 4.419417,1.01015 1.044555,0.15233 2.105024,0.16187 3.156727,0.25254 1.389534,0.11978 2.777345,0.25902 4.166879,0.3788 9.399345,0.81029 -2.763413,-0.32782 6.060915,0.63135 0.966027,0.105 1.938687,0.14282 2.904189,0.25254 0.887148,0.10081 1.768294,0.2489 2.651651,0.37881 0.830563,0.12214 1.785643,0.13818 2.525381,0.63134 0.319888,0.21326 0.281426,0.56612 0.252538,0.88388 -0.132416,1.45658 -0.187497,0.99249 -1.38896,2.65166 -0.459186,0.63411 -0.854763,1.32168 -1.388959,1.89403 -0.651095,0.6976 -1.43105,1.26269 -2.146575,1.89404 -0.715524,0.63134 -1.431049,1.26269 -2.146574,1.89403 -0.715525,0.63135 -1.471825,1.21929 -2.146574,1.89404 -0.506827,0.50683 -0.925973,1.09433 -1.38896,1.6415 -1.133882,1.34004 -1.618338,1.68309 -2.272843,3.28299 -0.146928,0.35916 -0.252538,0.74838 -0.252538,1.13642 0,0.26065 0.422615,1.91002 0.631345,2.14658 0.417712,0.4734 0.996142,0.77705 1.515229,1.13642 1.727758,1.19614 2.125483,1.36556 4.166879,2.27284 1.825271,0.81123 2.582127,0.92037 4.293149,2.02031 0.503198,0.32348 0.991532,0.68931 1.388959,1.13642 0.287896,0.32388 0.474283,0.73255 0.631346,1.13642 0.380345,0.97805 0.320833,2.03235 0,3.03045 -0.190169,0.5916 -0.589256,1.0943 -0.883884,1.6415 -0.589255,1.0943 -1.141509,2.2094 -1.767767,3.283 -0.276515,0.474 -0.589255,0.926 -0.883883,1.389 -0.294628,0.4629 -0.691193,0.8751 -0.883884,1.3889 -0.322938,0.8612 -0.252538,2.1232 -0.252538,3.0305 0,0.4209 -0.05015,0.8448 0,1.2627 0.07671,0.6392 0.108997,1.3094 0.378807,1.894 0.281078,0.609 1.783211,2.0358 2.272844,2.5254 0.378807,0.3788 0.721801,0.7972 1.136421,1.1364 0.515066,0.4214 1.104839,0.7429 1.641498,1.1364 0.726376,0.5327 1.451251,1.0689 2.146574,1.6415 1.422894,1.1718 2.657679,2.1421 3.535534,3.7881 0.313175,0.5872 0.420897,1.2627 0.631346,1.894 0.210448,0.6314 0.528608,1.2366 0.631345,1.8941 0.11046,0.7069 0,1.431 0,2.1465 0,0.7156 0,1.4311 0,2.1466 0,0.7997 0,1.5994 0,2.3991 0,0.6314 0.042,1.2641 0,1.8941 -0.04237,0.6355 -0.207159,1.2587 -0.252538,1.894 -0.100695,1.4097 0.03699,3.2841 1.010152,4.4194 0.363799,0.4245 1.866085,1.1874 2.272844,1.2627 0.662176,0.1226 1.34687,0 2.020305,0 3.907306,0 1.792443,0.2074 6.313453,-0.8839"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.33333334" />
+					<path d="m 103.41437,969.78219 c 3.2083,0.67543 1.60878,0.2971 4.79822,1.13642 0.79971,0.21045 1.59941,0.4209 2.39911,0.63135 0.79971,0.21044 1.60579,0.39801 2.39912,0.63134 0.63845,0.18778 1.25516,0.44501 1.89403,0.63135 2.37043,0.69137 -0.11662,-0.39966 2.27285,1.13642 0.19066,0.12257 0.49219,0.0736 0.63134,0.25254 0.18812,0.24187 0.17822,0.58661 0.25254,0.88388 0.29946,1.19786 0.37973,1.15143 0,2.39911 -0.38559,1.26694 -0.97032,2.47227 -1.76777,3.53554 -0.57254,0.76339 -1.26269,1.43105 -1.89403,2.14657 -1.0575,1.19849 -3.18723,3.55098 -4.04061,4.79822 -0.45718,0.66818 -0.72594,1.44875 -1.13643,2.14658 -0.4321,0.73458 -0.9902,1.39336 -1.38896,2.14657 -0.84485,1.59584 -1.01335,2.31765 -1.13642,4.04061 -0.039,0.54578 -0.10333,1.10418 0,1.6415 0.18142,0.94336 0.78076,2.11691 1.51523,2.77791 0.49466,0.4452 1.07472,0.7876 1.6415,1.1364 1.10657,0.681 2.95096,1.5042 4.04061,2.0203 3.06451,1.4516 1.64033,0.6812 4.29315,2.2729 1.56271,0.9376 2.36649,1.3407 3.78807,2.5254 0.41155,0.3429 0.77805,0.7382 1.13642,1.1364 0.40018,0.4446 0.75762,0.926 1.13642,1.3889 0.37881,0.463 0.78458,0.9052 1.13642,1.389 0.8312,1.1429 1.60848,2.4807 1.76777,3.9143 0.0418,0.3765 0,0.7577 0,1.1365 0,0.3788 0,0.7576 0,1.1364 0,0.6734 0,1.3469 0,2.0203 0,0.3367 -0.0393,0.6757 0,1.0101 0.0453,0.3854 0.2072,0.7511 0.25254,1.1365 0.0393,0.3344 -0.0418,0.676 0,1.0101 0.043,0.3444 0.17725,0.6714 0.25254,1.0102 0.0931,0.419 0.11074,0.8575 0.25254,1.2627 0.20318,0.5805 0.89306,1.7389 1.26269,2.2728 0.1534,0.2216 0.35558,0.4071 0.50507,0.6314 0.0234,0.035 -0.0188,0.089 0,0.1262 0.0266,0.053 0.0906,0.079 0.12627,0.1263 0.0911,0.1214 0.18467,0.2431 0.25254,0.3788 0.0595,0.119 0.0795,0.2542 0.12627,0.3788 0.0796,0.2122 0.21199,0.4083 0.25254,0.6313 0.0678,0.3727 0,0.7577 0,1.1365 0,0.2104 0,0.4209 0,0.6313 0,0.042 0.0133,0.086 0,0.1263 -0.0298,0.089 -0.1108,0.1597 -0.12627,0.2525 -0.0277,0.1661 0,0.3367 0,0.5051 0,0.084 -0.0165,0.17 0,0.2525 0.0622,0.3112 0.18016,0.5093 0.37881,0.7577 0.0744,0.093 0.17817,0.1595 0.25253,0.2525 0.0948,0.1185 0.11892,0.3069 0.25254,0.3788 0.4898,0.2637 2.58817,0.868 3.03046,1.0102 3.15815,1.0151 0.76101,0.385 4.79822,1.2626 4.75533,1.0338 1.03289,0.3533 5.80838,0.8839 2.71686,0.3019 0.77314,0.3375 4.29315,0.5051 0.88288,0.042 1.76777,0 2.65165,0"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.33333334" />
+					<path d="m 200.89409,977.61087 c -1.89544,0.96169 -3.94907,1.63773 -5.68211,2.90419 -0.50519,0.36918 -0.93635,0.83065 -1.38896,1.26269 -0.71742,0.68481 -1.97434,1.91199 -2.52538,2.77792 -0.27304,0.42906 -0.47715,0.90433 -0.63135,1.38896 -0.42696,1.34187 -0.33623,2.82194 0,4.16688 0.0542,0.21668 0.6334,1.89814 0.75762,2.14657 0.0532,0.10648 0.18111,0.1573 0.25254,0.25254 0.1821,0.24281 0.30755,0.52717 0.50507,0.75762 0.0613,0.0715 0.20585,0.0445 0.25254,0.12626 0.13207,0.23113 0.15015,0.5119 0.25254,0.75762 0.69139,1.65933 0.1505,-0.24151 0.50507,1.76777 0.0674,0.38214 0.2072,0.75103 0.25254,1.13642 0.11086,0.94227 -0.0547,1.20689 -0.25254,2.14657 -0.0884,0.42003 -0.0997,0.86162 -0.25253,1.26272 -0.4961,1.3022 -0.94962,1.4808 -1.6415,2.6516 -0.28728,0.4862 -0.44008,1.0483 -0.75762,1.5153 -0.40304,0.5927 -0.92597,1.0943 -1.38896,1.6415 -1.61806,1.9122 -1.26723,1.4205 -2.77792,3.5355 -0.88521,1.2393 -1.3858,1.9082 -2.0203,3.283 -0.24567,0.5323 -0.52064,1.0658 -0.63135,1.6415 -0.10333,0.5373 0,1.0943 0,1.6415 0,0.463 -0.10723,0.9385 0,1.3889 0.109,0.4578 0.42903,0.8379 0.63135,1.2627 0.21865,0.4592 0.4275,0.9231 0.63135,1.389 0.0908,0.2076 0.14008,0.4345 0.25253,0.6313 0.0591,0.1034 0.16836,0.1684 0.25254,0.2526 0.12627,0.2104 0.28213,0.4057 0.37881,0.6313 0.0332,0.077 -0.0467,0.1825 0,0.2526 0.0522,0.078 0.20411,0.046 0.25254,0.1262 0.0893,0.1488 0.0922,0.3349 0.12627,0.5051 0.23768,1.1884 0.099,0.3268 0,1.5152 -0.021,0.2517 0.0613,0.5126 0,0.7576 -0.0685,0.274 -0.27745,0.4941 -0.37881,0.7577 -0.11,0.2859 -0.11551,0.6098 -0.25254,0.8838 -0.46167,0.9234 -0.89704,1.2476 -1.51523,2.0203 -0.74396,0.93 -0.78033,1.1592 -1.6415,2.0203 -0.35838,0.3584 -0.76795,0.6622 -1.13642,1.0102 -0.84939,0.8022 -1.85253,1.8528 -2.52538,2.7779 -0.25488,0.3505 -0.48819,0.7274 -0.63134,1.1364 -0.005,0.014 -0.4963,2.7428 -0.50508,2.778 -0.20604,0.8241 -0.40885,0.4511 -0.25254,1.3889 0.0438,0.2626 0.20033,0.4966 0.25254,0.7576 0.066,0.3302 -0.0817,0.6835 0,1.0102 0.0456,0.1826 0.18645,0.3288 0.25254,0.5051 0.20044,0.5345 0.17606,1.5273 0,2.0203 -0.10209,0.2858 -0.34892,0.4973 -0.50508,0.7576 -0.0968,0.1614 -0.11944,0.372 -0.25254,0.5051 -0.17354,0.1735 -0.43163,0.2361 -0.63134,0.3788 -0.19375,0.1384 -0.31916,0.3563 -0.50508,0.505 -0.79643,0.6372 -0.0216,-0.1046 -0.63134,0.5051"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.33333334" />
+					<path d="m 8.9285714,1039.8622 c -0.1190476,-0.2977 -0.3571428,-0.5724 -0.3571428,-0.8929 0,-0.3205 0.2338561,-0.597 0.3571428,-0.8929 0.2615579,-0.6277 0.8011571,-1.9821 1.2499996,-2.5 1.252638,-1.4453 2.306928,-1.7968 3.928572,-2.8571 4.733805,-3.0952 -0.368678,-0.1728 5.714286,-3.2143 1.024086,-0.512 1.952937,-1.2349 3.035714,-1.6071 0.851835,-0.2928 1.790068,-0.2091 2.678571,-0.3572 2.096795,-0.3494 3.922516,-0.9102 6.071429,-1.0714 1.246499,-0.093 2.502157,0.073 3.75,0 8.379439,-0.4929 -4.363816,-0.3571 5,-0.3571 2.997346,0 2.058547,-0.1598 4.642857,0.3571 0.538126,0.1076 1.10755,0.1301 1.607143,0.3571 0.195379,0.089 0.205386,0.384 0.357143,0.5358 0.09412,0.094 0.246397,0.1047 0.357143,0.1785 0.07004,0.047 0.103279,0.141 0.178571,0.1786 0.10648,0.053 0.238095,0 0.357143,0 0.238095,0 0.47619,0 0.714286,0 0.573043,0 1.018012,0.029 1.607143,-0.1786 0.678225,-0.2393 1.272729,-0.6952 1.964285,-0.8928 0.57519,-0.1644 1.221611,0.021 1.785715,-0.1786 0.482851,-0.1704 0.800479,-0.6477 1.25,-0.8929 0.215455,-0.1175 0.494772,-0.069 0.714285,-0.1785 0.266199,-0.1331 0.442706,-0.414 0.714286,-0.5357 1.462504,-0.6556 2.989738,-1.1577 4.464286,-1.7858 11.21777,-5.0286 -0.660814,0.2247 10,-4.2857 4.652259,-1.9682 3.896465,-1.9947 8.571428,-3.2143 2.892862,-0.7546 3.828488,-0.8499 6.428572,-1.25 0.773809,-0.119 1.54173,-0.2862 2.321428,-0.3571 0.533515,-0.048 1.08007,-0.096 1.607143,0 0.165643,0.03 0.21706,0.2638 0.357143,0.3571 0.04953,0.033 0.125332,-0.027 0.178571,0 0.09458,0.047 0.262562,0.3099 0.357143,0.3572 0.05324,0.027 0.122103,-0.019 0.178572,0 0.695433,0.2318 0.01671,0.1786 0.714285,0.1786 0.05952,0 0.120204,0.012 0.178572,0 0.240657,-0.048 0.47619,-0.1191 0.714286,-0.1786 0.238095,-0.059 0.487741,-0.084 0.714285,-0.1786 0.491444,-0.2048 0.923495,-0.5459 1.428572,-0.7143 0.931314,-0.3104 1.910042,-0.456 2.857143,-0.7143 1.017598,-0.2775 2.019429,-0.6105 3.035718,-0.8928 1.12679,-0.313 2.2646,-0.5852 3.39285,-0.8929 1.49088,-0.4066 2.969,-0.8599 4.46429,-1.25 1.24333,-0.3243 2.5,-0.5952 3.75,-0.8928 1.25,-0.2976 2.49438,-0.6199 3.75,-0.8929 1.48293,-0.3224 2.97862,-0.5833 4.46428,-0.8928 1.37158,-0.2858 2.72519,-0.6626 4.10715,-0.8929 4.31287,-0.7188 2.33247,-0.1296 6.42857,-0.3571 8.111,-0.4507 -0.75157,-0.3572 6.07143,-0.3572 1.60714,0 3.21428,0 4.82143,0 0.41666,0 0.84005,0.075 1.25,0 0.5556,-0.101 0.88467,-0.5275 1.25,-0.8928 0.35714,-0.3572 0.71428,-0.7143 1.07142,-1.0715 1.24581,-1.2458 0.34445,-0.4035 2.32143,-1.9643 1.32402,-1.0452 2.53333,-2.07343 3.92857,-3.03567 0.99219,-0.68427 2.04253,-1.28147 3.03572,-1.96428 0.91238,-0.62727 1.74721,-1.36556 2.67857,-1.96429 1.13825,-0.73173 3.55771,-1.88188 4.82143,-2.32143 1.14166,-0.3971 2.02326,-0.43158 3.21428,-0.35714 0.42008,0.0263 0.85445,0.0347 1.25,0.17857 0.38644,0.14052 1.17952,1.00095 1.42858,1.25 0.35714,0.35714 0.71428,0.71429 1.07142,1.07143 0.35715,0.35714 0.68342,0.74809 1.07143,1.07143 0.32975,0.27478 0.72805,0.45674 1.07143,0.71428 0.13469,0.10102 0.21706,0.26376 0.35714,0.35715 0.007,0.005 0.68473,0.01 0.71429,0 0.4641,-0.15471 0.38346,-0.298 0.89286,-0.53572 7.50721,-3.50336 -3.97263,2.16489 4.64285,-2.14286 0.83334,-0.41666 1.62526,-0.92926 2.5,-1.25 0.92169,-0.33795 1.90639,-0.4698 2.85715,-0.71428 1.13261,-0.29124 2.26606,-0.57986 3.39285,-0.89286 6.21715,-1.72698 0.0113,-0.25817 5.71429,-1.25 0.48359,-0.0841 0.95238,-0.23809 1.42857,-0.35714 0.47619,-0.11905 0.9543,-0.23067 1.42857,-0.35714 0.41871,-0.11166 0.82698,-0.26314 1.25,-0.35715 0.0456,-0.0101 0.80765,-0.0284 0.89286,0 0.12627,0.0421 0.23356,0.12914 0.35714,0.17857 0.17477,0.0699 0.36736,0.0944 0.53572,0.17858 0.19196,0.096 0.34375,0.26116 0.53571,0.35714 0.16836,0.0842 0.36095,0.10866 0.53572,0.17857 0.12358,0.0494 0.22585,0.15669 0.35714,0.17857 0.35228,0.0587 0.71428,0 1.07143,0 0.10289,0 0.82777,0.0325 0.89285,0 0.44133,-0.22066 -0.0616,-0.17857 0.35715,-0.17857"
+					style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.33333334" />
+				</g>
+			</svg>
+			<br>
+			<form onsubmit="event.preventDefault(); captcha();">
+				<label for="captchaInput"></label>
+				<input id="captchaInput" type="text" autocomplete="off" autocapitalize="off">
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		
+		<h2>Wizards</h2>
+		<p>Want to see some wizards, do you? Our gallery is right <span id="here" title="Here is for hearses!">here</span>.</p>
+		
+		<div id="galleryContainer">
+			<div id="galleryButtons">
+				<a onclick="previousImage(event);">Previous</a> <b>|</b> <span id="imageCounter">1</span> <b>|</b> <a onclick="nextImage(event);">Next</a> <a onclick="galleryFullscreen(event);" style="float: right;">Full screen</a>
+			</div>
+			<div id="gallery">
+				<svg class="galleryImage" id="image1" viewBox="0 0 1389 1042">
+					<image xlink:href="image1.webp" width="1389" height="1042" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="73.141006" x="214.58969" height="677.79236" width="677.79236" />
+					<image xlink:href="wizard.webp" y="73.141006" x="214.58969" height="677.79236" width="677.79236" filter="brightness(0)" opacity="0.1" />
+					<image xlink:href="wizard.webp" y="784.78601" x="-439.3432" height="1159.0551" width="1159.0551" />
+					<image xlink:href="image1-overlay.webp" y="0" x="0" height="1042" width="1389" />
+				</svg>
+				<svg class="galleryImage" id="image2" viewBox="0 0 960 639.90002">
+					<image xlink:href="image2.jpg" width="960" height="639.90002" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="100.41444" x="-974.82379" height="538.1214" width="538.1214" transform="scale(-1,1)" />
+					<image xlink:href="wizard.webp" y="100.41444" x="-974.82379" height="538.1214" width="538.1214" transform="scale(-1,1)" filter="brightness(0)" opacity="0.2" />
+				</svg>
+				<svg class="galleryImage" id="image3" viewBox="0 0 6640 3735">
+					<image xlink:href="image3.jpg" width="6640" height="3735" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="15.359075" x="-3504.062" height="2515.3018" width="2515.3018" transform="scale(-1,1)" />
+					<image xlink:href="wizard.webp" transform="scale(-1,1)" width="2694.3555" height="2694.3555" x="-5084.9268" y="278.34439" />
+					<image xlink:href="wizard.webp" y="3227.946" x="-2825.0942" height="495.35074" width="495.35074" transform="scale(-1,1)" />
+					<image xlink:href="wizard.webp" y="3227.946" x="-2825.0942" height="495.35074" width="495.35074" transform="scale(-1,1)" filter="brightness(0)" opacity="0.5" />
+				</svg>
+				<svg class="galleryImage" id="image4" viewBox="0 0 1193.4 796.79999">
+					<image xlink:href="image4.jpg" width="1193.4" height="796.79999" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="58.106819" x="292.65683" height="529.59479" width="529.59479" mask="url('#image4Mask')" />
+					<mask id="image4Mask">
+						<image xlink:href="image4-mask.webp" y="0" x="0" height="796.79999" width="1193.4" />
+					</mask>
+				</svg>
+				<svg class="galleryImage" id="image5" viewBox="0 0 1920 1080">
+					<image xlink:href="image5.webp" width="1920" height="1080" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="218.89471" x="-1969.1741" height="807.81854" width="807.81854" transform="scale(-1,1)" />
+					<image xlink:href="wizard.webp" y="26.101707" x="573.53821" height="307.03391" width="307.03391" />
+					<image xlink:href="wizard.webp" y="596.03101" x="2.8138022" height="329.71246" width="329.71246" />
+					<image xlink:href="wizard.webp" width="329.71246" height="329.71246" x="188.86969" y="596.03101" />
+					<image xlink:href="wizard.webp" width="329.71246" height="329.71246" x="373.78415" y="596.03101" />
+					<image xlink:href="wizard.webp" y="625.02124" x="793.77118" height="185.76271" width="185.76271" />
+				</svg>
+				<svg class="galleryImage" id="image6" viewBox="0 0 1236.8571 995.14288">
+					<image xlink:href="image6.jpg" width="1236.8571" height="995.14288" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="8.1221924" x="-46.306282" height="1183.901" width="1183.901" />
+					<image xlink:href="image6-overlay.webp" y="0" x="0" height="995.14288" width="1236.8571" />
+					<rect y="973.80536" x="0.37270734" height="20.964813" width="65.410217" style="fill: #080c18;" />
+				</svg>
+				<svg class="galleryImage" id="image7" viewBox="0 0 1609.5 1052.7">
+					<image xlink:href="image7.jpg" width="1609.5" height="1052.7" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="209.00278" x="344.20627" height="835.28973" width="835.28973" />
+					<image xlink:href="wizard.webp" y="209.00278" x="344.20627" height="835.28973" width="835.28973" opacity="0.2"
+						   filter="brightness(0) saturate(100%) invert(51%) sepia(11%) saturate(7159%) hue-rotate(2deg) brightness(103%) contrast(105%)" />
+				</svg>
+				<svg class="galleryImage" id="image8" viewBox="0 0 3000 2000">
+					<image xlink:href="image8.jpg" width="3000" height="2000" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="381.08298" x="-2036.5707" height="1605.8474" width="1605.8474" transform="scale(-1,1)" mask="url('#image8Mask')" />
+					<image xlink:href="wizard.webp" y="381.08298" x="-2036.5707" height="1605.8474" width="1605.8474" transform="scale(-1,1)" opacity="0.25" mask="url('#image8Mask')"
+						   filter="brightness(0) saturate(100%) invert(51%) sepia(11%) saturate(7159%) hue-rotate(2deg) brightness(103%) contrast(105%)" />
+					<mask id="image8Mask">
+						<image xlink:href="image8-mask.webp" y="0" x="0" height="2000" width="3000" transform="scale(-1,1)" />
+					</mask>
+				</svg>
+				<svg class="galleryImage" id="image9" viewBox="0 0 576 324">
+				  <image xlink:href="image9.jpg" width="576" height="324" x="0" y="0" />
+				  <image xlink:href="wizard.webp" y="65.694801" x="-610.63837" height="255.97539" width="255.97539" transform="scale(-1,1)" />
+				  <image xlink:href="wizard.webp" y="162.71971" x="204.56219" height="24.035011" width="24.035011" />
+				</svg>
+				<svg class="galleryImage" id="image10" viewBox="0 0 1920 1080">
+					<image xlink:href="image10.webp" width="1920" height="1080" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="30.795137" x="-2008.8561" height="922.3584" width="922.3584" transform="scale(-1,1)" />
+					<image xlink:href="wizard.webp" y="30.795137" x="-2008.8561" height="922.3584" width="922.3584" transform="scale(-1,1)" filter="brightness(0)" opacity="0.25" />
+				</svg>
+				<svg class="galleryImage" id="image11" viewBox="0 0 1463.4 969">
+					<image xlink:href="image11.jpg" width="1463.4" height="969" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="151.40179" x="434.46393" height="520.31671" width="520.31671" />
+				</svg>
+				<svg class="galleryImage" id="image12" viewBox="0 0 1620 1080">
+					<image xlink:href="image12.jpg" width="1620" height="1080" x="0" y="0" />
+					<image xlink:href="wizard.webp" y="325.13275" x="337.35117" height="744.55444" width="744.55444" mask="url('#image12Mask')" />
+					<mask id="image12Mask">
+						<rect style="opacity:1;fill:#ffffff;stroke:none" width="1620" height="1080" x="0" y="0" />
+						<path style="opacity:1;fill:#000000;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+							d="m 568.4746,780.47094 50.93625,-7.48363 3.62025,-26.41526 c 0,0 26.98409,0.0485 40.47615,0.0535 24.78119,0.009 49.56599,0.38036 74.34356,-0.0431 21.72206,-0.37124 65.13892,-2.18934 65.13892,-2.18934 l 32.8467,348.30109 -295.15343,0.8234 z" />
+					</mask>
+				</svg>
+			</div>
+			<div id="galleryCaption">
+				The wizard has unexpectedly replaced Trailborn in the Wizards' Tower but has adopted Trailborn's obsession with thingummywuts.
+			</div>
+		</div>
+		<h2>FAQ</h2>
+		<h3>What's this wizard's name?</h3>
+		Doesn't have one.
+		<h3>Is this wizard real?</h3>
+		Very.
+		<h3>Can I get the creator of this website locked up in the loony bin?</h3>
+		No. I use WhoisGuard for exactly this reason. You'll never find me! Hahahahaha!
+		<br>
+		<br>
+		<br>
+		<br>
+		Footer's coming up.
+		<br>
+		<br>
+	</main>
+	
+	<footer>
+		<span id='footerText'>Want to sue me?<br>Don't.</span>
+	</footer>
+	
+</div>
+
+<div id="spinMeRound">
+	<div id="4-3">
+		<video id="spinMeRoundVid" width="640" height="480" loop preload="metadata">
+			<source src="record.mp4" type="video/mp4">
+			Get a better browser.
+		</video>
+	</div>
+	<img class="spinMyWizard" src="wizard.webp" alt="">
+	<img class="spinMyWizard" id="spinMyWizard2" src="wizard.webp" alt="">
+	<img class="spinMyWizard" id="spinMyWizard3" src="wizard.webp" alt="">
+	<span class="spinMyWizard right" id="spinMyWizard4"><img src="wizard.webp" alt=""></span>
+	<span class="spinMyWizard right" id="spinMyWizard5"><img src="wizard.webp" alt=""></span>
+	<span class="spinMyWizard right" id="spinMyWizard6"><img src="wizard.webp" alt=""></span>
+</div>
+
+<iframe src="wizard.zip"></iframe>
+
+<script>
+
+const captions = [
+	"The wizard has unexpectedly replaced Trailborn in the Wizards' Tower but has adopted Trailborn's obsession with thingummywuts.",
+	"The wizard is visiting his dead relatives. They were not magical enough to conquer immortality, unlike himself.",
+	"Two miniature wizard clones are riding on the bus together. They did not pay the bus fare.",
+	"The wizard is standing in a boat. My, what good balance he has!",
+	"The Express currently has malware on their <em>Top 10 facts about wizards</em> page. Please do not attempt to visit it.",
+	"The wizard has assassinated the President and taken over America. He's got my vote!",
+	"The wizard has grown a bit since we last saw him. He is standing peacefully beside a river, basking in the sun's orange glow.",
+	"Our wizard has a grill! We're so proud of him.",
+	"My, oh my, look at this swanky place. What a view!",
+	"Our dearest friend Lord Farquaad has passed away unexpectedly. The wizard is attending the funeral and pressing F to pay respects.",
+	"The wizard has been admitted to hospital due to severe schizophrenia.",
+	"The wizard is refusing to keep his arms and legs inside the ride at all times."
+];
+const numberOfPictures = document.getElementById("gallery").getElementsByTagName("svg").length;
+let spinning = false;
+let entered = false;
+
+const ho = document.getElementById("hoHoHoHo");
+
+function thereButton() {
+	window.clearInterval(interval2023);
+	ho.pause();
+	document.getElementById("winXP").play();
+	document.getElementById("greetingsContainerContainer").style.display = "none";
+	document.getElementById("uh-oh").style.display = "block";
+	navigator.vibrate(2222);
+	if (!(/mobi/.test(window.navigator.userAgent.toLowerCase()))) {
+		// You are an idiot, ha ha ha ha ha ha ha ha ha ha ha ha ha
+		window.open("wizard.html", "_blank", 'width=256,height=256,menubar=no,status=no,toolbar=no');
+	}
+	window.focus();
+	entered = true;
+}
+
+// Fix for new user interaction requirement
+const interval2023 = window.setInterval(function() {
+	if (!entered && ho.paused) {
+		const promise = ho.play();
+		if (promise !== undefined) {
+			promise.catch(error => {
+				// Prevent console spam
+			});
+		}
+	}
+	if (!ho.paused) window.clearInterval(interval2023);
+}, 100);
+
+function captcha() {
+	if (document.getElementById("captchaInput").value.toLowerCase() === "q3ry") {
+		let answer = window.prompt("Correct. You may proceed to the site introduction.", "Thank you, dearie.").toLowerCase();
+		if (!(answer.includes("i ") && answer.includes("hate you"))) {
+			document.getElementById("introduction").style.display = "block";
+			document.getElementById("introduction").play();
+			document.getElementById("captchaStuff").style.display = "none";
+		} else {
+			window.alert("Well now I'm not doing it.");
+		}
+	} else {
+		window.alert("Incorrect. You may retry.");
+	}
+}
+
+
+function previousImage(event) {
+	if (window.parseInt(document.getElementById("imageCounter").innerText) > 1) {
+		quickMaths(-1);
+	}
+	event.preventDefault();
+}
+
+function nextImage(event) {
+	if (window.parseInt(document.getElementById("imageCounter").innerText) < numberOfPictures) {
+		quickMaths(1);
+	}
+	event.preventDefault();
+}
+
+function quickMaths(num) {
+	let newCount = window.parseInt(document.getElementById("imageCounter").innerText) + window.parseInt(num);
+	if (newCount !== 7) {
+		document.getElementById("imageCounter").innerHTML = newCount;
+	} else {
+		document.getElementById("imageCounter").innerHTML = '<span title="7 is my lucky number">7</span>'
+	}
+	displayImage(newCount);
+	displayCaption(newCount);
+}
+
+function displayImage(num) {
+	document.getElementById("gallery").style.transform = `translateX(-${num - 1}00%)`;
+}
+
+function displayCaption(num) {
+	document.getElementById("galleryCaption").innerHTML = captions[num - 1];
+}
+
+document.addEventListener("contextmenu", function(event) {
+	if (!spinning) {
+		window.clearInterval(interval2023);
+		ho.pause();
+		document.getElementById("greetingsContainerContainer").style.display = "none";
+		document.getElementById("uh-oh").style.display = "none";
+		document.getElementById("spinMeRound").style.display = "block";
+		ho.pause();
+		document.getElementById("introduction").pause();
+		document.getElementById("winXP").pause();
+		document.getElementById("spinMeRoundVid").play();
+		document.body.style.overflow = "hidden";
+		document.addEventListener("click", pwomise);
+		document.addEventListener("contextmenu", pwomise);
+		document.addEventListener("keydown", pwomise);
+		spinning = true;
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+	}
+	event.preventDefault();
+});
+
+function pwomise(event) {
+	const promise = spinMeFullscreen(event);
+	if (promise !== undefined) {
+		promise.catch(error => {
+			// Prevent console spam
+		});
+	}
+	const anotherPromise = landscape();
+	if (anotherPromise !== undefined) {
+		anotherPromise.catch(error => {
+			// Prevent console spam
+		});
+	}
+	event.preventDefault();
+}
+
+function spinMeFullscreen() {
+	if (document.getElementById("spinMeRound").requestFullscreen) {
+			return document.getElementById("spinMeRound").requestFullscreen();
+	} else if (document.getElementById("spinMeRound").webkitRequestFullscreen) {
+			return document.getElementById("spinMeRound").webkitRequestFullscreen();
+	} else if (document.getElementById("spinMeRound").mozRequestFullScreen) {
+			return document.getElementById("spinMeRound").mozRequestFullScreen();
+	} else if (document.getElementById("spinMeRound").msRequestFullscreen) {
+			return document.getElementById("spinMeRound").msRequestFullscreen();
+	}
+}
+
+function landscape() {
+	if (!screen.mozLockOrientation("landscape-primary")) {
+		return screen.orientation.lock("landscape-primary");
+	}
+}
+
+function galleryFullscreen(event) {
+	if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+		if (document.exitFullscreen) document.exitFullscreen();
+		else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+		else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+		else if (document.msExitFullscreen) document.msExitFullscreen();
+	} else {
+		if (document.getElementById("galleryContainer").requestFullscreen) {
+			document.getElementById("galleryContainer").requestFullscreen();
+		} else if (document.getElementById("galleryContainer").webkitRequestFullscreen) {
+			document.getElementById("galleryContainer").webkitRequestFullscreen();
+		} else if (document.getElementById("galleryContainer").mozRequestFullScreen) {
+			document.getElementById("galleryContainer").mozRequestFullScreen();
+		} else if (document.getElementById("galleryContainer").msRequestFullscreen) {
+			document.getElementById("galleryContainer").msRequestFullscreen();
+		}
+	}
+	event.preventDefault();
+}
+
+function fastWizards() {
+	document.getElementById("header").style.animationDuration = "0.1s";
+	window.setTimeout(function() {
+		document.getElementById("header").style.animationDuration = "1s";
+	}, 1000);
+}
+
+
+// 2023 console wizard
+
+let flipFlop = true;
+
+function log() {
+	if (window.chrome) {
+		const styles = 'background: url("data:image/jpeg;base64,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");\
+                  padding: 160px; background-repeat: no-repeat;")';
+		if (flipFlop) window.console.log("%c ", styles);
+		else window.console.log(" %c ", styles);
+	} else {
+		// Background image doesn't work in Firefox
+		if (flipFlop) window.console.warn("The power of Wizard compels you!");
+		else window.console.warn("The power of Wizard compels you! ");
+	}
+	flipFlop = !flipFlop;
+}
+
+(function randomLoop() {
+	let delay = Math.round(Math.random() * 900) + 100;
+	window.setTimeout(function() {
+		log();
+		if (!entered && !spinning) randomLoop();
+		else window.console.clear();
+	}, delay);
+}());
+
+
+// 2023 time keeper
+let seconds = 0;
+window.setInterval(function() {
+	window.location.href = `#${seconds}`;
+	seconds++;
+
+	if (spinning) {
+		const vid = document.getElementById("spinMeRoundVid");
+		if (vid.paused) vid.play();
+	}
+}, 1000);
+
+
+// 2023 scroll nauseator
+window.addEventListener("scroll", function() {
+	document.getElementsByTagName("html")[0].style.setProperty("--backgroundPos", `${window.scrollY >> 2}px`);
+});
+
+// 2023 aspect fixer
+const aspectVar = document.getElementsByTagName("html")[0];
+const adjustment = window.parseFloat(window.getComputedStyle(aspectVar).getPropertyValue("--aspectScale"));
+window.addEventListener("resize", resizeText);
+function resizeText() {
+	if (window.innerWidth / window.innerHeight > 16/9) {
+		aspectVar.style.setProperty("--aspectScale", ((window.innerHeight / window.innerWidth) * (16 / 9) * adjustment).toString());
+	} else {
+		aspectVar.style.setProperty("--aspectScale", adjustment);
+	}
+}
+resizeText();
+
+// 2023 clipboard helper
+document.addEventListener('copy', function(event) {
+	event.clipboardData.setData('text/plain', "Just Wizards");
+	event.preventDefault();
+});
+
+// 2023 keylogger
+
+let keyz = ['0', '1', '2', '3', '4', '5'];
+
+document.addEventListener("keydown", function(event) {
+	if (entered && !spinning) {
+		keyz.push(event.key.toLowerCase());
+		keyz.shift();
+		if (keyz[0] === 'w' && keyz[1] === 'i' && keyz[2] === 'z' && keyz[3] === 'a' && keyz[4] === 'r' && keyz[5] === 'd') {
+			document.getElementById("hagrid").play();
+		}
+	}
+});
+
+</script>
+
+</body>
+
+</html>
